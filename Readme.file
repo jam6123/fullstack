@@ -1,0 +1,5 @@
+authentication used: accessToken using JWT
+
+csrf proctected
+
+uses "helmet" npm package for security with HEADERS

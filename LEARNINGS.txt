@@ -1,0 +1,12 @@
+It is normal that your fetch api is run twice inside useEffect, you know the react's strict mode causing that.
+
+All 4XX status codes are still successful request but the intended request was fail.
+
+A "CSRF attack" is often referred to as a “one-way” attack, as attackers can access and manipulate HTTP requests but cannot access the responses data.
+
+A CSRF token is meant to protect state changing routes, so it's okay if there's no csrf protection on GET routes unless it also do some mutation.
+
+Use useReducer when the state handling gets complex, not when the amount of variables increases. For example when different state variables rely on each other.
+
+To avoid database call on every client request just to check the user's session for example, you can store session in redis instead.
+
