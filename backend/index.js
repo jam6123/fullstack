@@ -20,7 +20,7 @@ const corsOptions = {
   // Also the fetch api of the client must have the option "credentials: "include"".
   origin: ["http://192.168.50.31:5173", "http://localhost:5173"],
   credentials: true,
-  exposedHeaders: ["xsrf-token", "x-ratelimit-remaining"]    // Means the response headers that we can access in client javascript.
+  exposedHeaders: ["xsrf-token", "x-ratelimit-remaining"]    // The response headers that we can access in client javascript.
 };
 
 app.use(helmet())
@@ -31,7 +31,7 @@ app.use(express.json({ verify: validateReqBody }));
 // user routes
 app.use('/api/users', userRoutes);
 
-// 404 - Not Found (if any routes above doesn't match )
+// 404 - Not Found (if any routes above doesn't match or url matched but no http verb handler. )
 app.use(notFoundHandler);
 
 // This is required to process the error we're throwing in our middlwares/handlers.

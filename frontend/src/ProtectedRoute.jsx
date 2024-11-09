@@ -18,7 +18,7 @@ function ProtectedRoute() {
   useEffect(() => {
     async function getUserProfile() {
       console.log('ProtectedRoute remounted');
-      // Cookies are automcatically sent.
+      // Cookies are automatically sent because it has "http only" value.
       // The token from our cookies will be checked at the backend to see...
       // if it is expired or no token provided. 
       const response = await fetch(`${apiBaseUrl}/profile`, {
