@@ -7,7 +7,7 @@ const {
   getAllUsers
 } = require('../controllers/userController');
 const isAdmin = require('../middleware/isAdmin.js');
-const { validateLoginData, validateSignupData } = require('../middleware/validate.js');
+const { validateLoginData, validateSignupData, validateUpdateData } = require('../middleware/validate.js');
 const authenticate = require('../middleware/authenticate.js');
 const csrfProtection = require('../middleware/csrfProtection.js');
 const express = require('express');
@@ -17,9 +17,12 @@ const router = express.Router();
 
 router.route('/profile')
   .get(authenticate, getCurrentUser)
-  .put(authenticate, csrfProtection, updateCurrentUser);
+  .put(authenticate, csrfProtection, validateUpdateData, updateCurrentUser);
+  
 router.post('/signup', validateSignupData, createUser);
+
 router.post('/login', limitRequest, validateLoginData, loginUser);
+
 router.post('/logout', authenticate, csrfProtection, logoutUser);
 
 // Admin routes 👇👇👇

@@ -4,15 +4,18 @@ const verifyToken = require('../utils/verifyToken');
 const { ApiError } = require('../utils/ApiError');
 const code = require('../constant/errorCode');
 
+/* 
+  This middleware checks if the submitted token is valid and NOT expired yet.
+*/
 async function authenticate(req, res, next) {
   const token = req.cookies.jwt;
+  
   if (!token) {
     throw new ApiError(code.INVALID_TOKEN, StatusCodes.UNAUTHORIZED);
   }
 
   const decoded = verifyToken(token);
   if (!decoded) {
-    await RevokedToken.deleteOne({ token });
     throw new ApiError(code.INVALID_TOKEN, StatusCodes.UNAUTHORIZED);
   }
 

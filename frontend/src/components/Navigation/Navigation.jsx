@@ -5,7 +5,7 @@ import LogoutButton from "../LogoutButton/LogoutButton";
 function Navigation() {
 
   return (
-    <nav>
+    <nav style={{ width: "500px", display: "flex", justifyContent: "space-between" }}>
       <Link to={"/"} >Home</Link>
       <Link to={"/about"}>About</Link>
       <Link to={"/settings"}>Settings</Link>

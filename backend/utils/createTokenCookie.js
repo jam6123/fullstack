@@ -1,19 +1,19 @@
 const jwt = require('jsonwebtoken')
 
 function createTokenCookie(res, payload) {
+  // We used this variable so both cookie and jwt have the same expiration time.
+  const TIME_IN_SECONDS = 180;
+
   // the expiration time unit in jwt is seconds
   const token = jwt.sign(payload, process.env.JWT_SECRET, {
-    expiresIn: '60s'
+    expiresIn: `${TIME_IN_SECONDS}s`
   })
 
-  const days = 2
-
   res.cookie('jwt', token, {
-    sameSite: "strict",
-    secure: true,
+    sameSite: "lax",
+    secure: process.env.NODE_ENV === 'production',
     httpOnly: true,
-    // maxAge: days * 24 * 60 * 60 * 1000  //cookie expiration time
-    maxAge: 1000 * 60      // 60 seconds
+    maxAge: 1000 * TIME_IN_SECONDS      
   })
 }
 

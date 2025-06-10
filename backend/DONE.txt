@@ -1,2 +1,5 @@
 added csrf protection
+added input validation
+added rate limiting
+
 

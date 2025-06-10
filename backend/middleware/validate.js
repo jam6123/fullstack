@@ -23,7 +23,6 @@ const validateLoginData = [
     .withMessage(() => { throw new ApiError(code.RECIEVED_EMPTY_FIELD, StatusCodes.BAD_REQUEST); })
     .isString()
     .withMessage(() => { throw new ApiError(code.INVALID_DATA_FORMAT, StatusCodes.BAD_REQUEST); })
-    .trim()
 ];
 
 // ==================================================================================================================================
@@ -34,7 +33,7 @@ const validateSignupData = [
     .notEmpty()
     .withMessage(() => { throw new ApiError(code.RECIEVED_EMPTY_FIELD, StatusCodes.BAD_REQUEST); })
     .isString()
-    .isAlphanumeric()
+    .isAlphanumeric()   // this only allows letters and numbers
     .withMessage(() => { throw new ApiError(code.INVALID_DATA_FORMAT, StatusCodes.BAD_REQUEST); })
     .trim(),
 
@@ -54,7 +53,6 @@ const validateSignupData = [
     .withMessage(() => { throw new ApiError(code.RECIEVED_EMPTY_FIELD, StatusCodes.BAD_REQUEST); })
     .isString()
     .withMessage(() => { throw new ApiError(code.INVALID_DATA_FORMAT, StatusCodes.BAD_REQUEST); })
-    .trim()
     .isStrongPassword({
       minLength: 8,
       minLowercase: 1,
@@ -79,4 +77,14 @@ const validateSignupData = [
     .withMessage(() => { throw new ApiError(code.PASSWORD_NOT_MATCH, StatusCodes.BAD_REQUEST); }),
 ];
 
-module.exports = { validateLoginData, validateSignupData };
+const validateUpdateData = [
+  body('username')
+  .notEmpty()
+  .withMessage(() => { throw new ApiError(code.RECIEVED_EMPTY_FIELD, StatusCodes.BAD_REQUEST); })
+  .isString()
+  .isAlphanumeric()   // this only allows letters and numbers
+  .withMessage(() => { throw new ApiError(code.INVALID_DATA_FORMAT, StatusCodes.BAD_REQUEST); })
+  .trim()
+];
+
+module.exports = { validateLoginData, validateSignupData, validateUpdateData };

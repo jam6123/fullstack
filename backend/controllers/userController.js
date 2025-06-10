@@ -11,7 +11,7 @@ const generateCsrfToken = require('../helpers/generateCsrfToken');
 
 async function createUser(req, res) {
   const { username, email, password } = req.body;
-  const emailExists = await User.findOne({ email });
+  const emailExists = await User.findOne({ email });      // query email from our database
 
   if (emailExists) {
     throw new ApiError(code.EMAIL_ALREADY_EXISTS, StatusCodes.CONFLICT);
@@ -25,7 +25,7 @@ async function createUser(req, res) {
     password: hashedPassword
   });
 
-  await createdUser.save();
+  await createdUser.save();     // save the new user into our database
   res.sendStatus(StatusCodes.CREATED);
 }
 
@@ -33,7 +33,7 @@ async function createUser(req, res) {
 
 async function loginUser(req, res) {
   const { email, password } = req.body;
-  const foundUser = await User.findOne({ email });
+  const foundUser = await User.findOne({ email });      // query email from our database
 
   if (foundUser) {
     const doesPasswordMatch = await bcrypt.compare(password, foundUser.password);

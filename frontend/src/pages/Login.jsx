@@ -35,7 +35,6 @@ function Login() {
       ...user,
       data: json.data,
     });
-    localStorage.setItem("user", JSON.stringify(json.data));
   };
 
   if (user.data) {
@@ -46,10 +45,10 @@ function Login() {
     <div>
       <form onSubmit={handleSubmit}>
         <h1>Login</h1>
-        <input type="text" placeholder="email" name="email" value={"badmin@gmail.com"} readOnly />
-        <input type="text" placeholder="password" name="password" value={"admin1234"} readOnly />
+        <input type="text" placeholder="email" name="email" defaultValue={"admin@gmail.com"} />
+        <input type="text" placeholder="password" name="password" defaultValue={"admin1234"} />
 
-        <button type="submit">Login</button>
+        <button type="submit" style={{ backgroundColor: "blue", color: "white"}}>Login</button>
       </form>
       <p>No account? Go to <Link to={"/signup"}>Signup</Link></p>
     </div>

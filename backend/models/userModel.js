@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-const { ApiError } = require('../utils/ApiError')
 
 const userSchema = mongoose.Schema({
   username: {
@@ -9,7 +8,8 @@ const userSchema = mongoose.Schema({
   email: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
+    index: true     // We added index for faster lookups
   },
   password: {
     type: String,
